@@ -1,0 +1,8 @@
+.cproject
+.project
+.settings/
+build/
+.DS_Store
+include/.DS_Store
+src/.DS_Store
+doc/
