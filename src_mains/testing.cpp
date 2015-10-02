@@ -25,6 +25,8 @@ using namespace std;
 using namespace rag;
 
 int main(int argc, char** argv) {
+	cout << "LibRAG 0.1 Testing" << endl;
+
 	typedef RankAggregator<string>::rlist rk_list;
 
 	RankAggregator<string>::ptr aggregator = RankAggregator<string>::create("median");
