@@ -8,6 +8,7 @@
 #define AGGREGATOR_XML_H_
 
 #include "aggregator.h"
+#include "libdataset/libdataset.h"
 
 namespace rag {
 
@@ -19,9 +20,15 @@ namespace rag {
 			AggregatorXML(std::string path_xml);
 
 			virtual ~AggregatorXML();
+
+		protected:
+			BGS_Platform::libdataset::XMLDocument xml_rules_;
+
 	};
+
+#define _LIB_RAG_AGGREGATOR_XML_T_
+#include "aggregator_xml.t"
+#undef _LIB_RAG_AGGREGATOR_XML_T_
 }
-
-
 
 #endif /* AGGREGATOR_XML_H_ */

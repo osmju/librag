@@ -23,10 +23,6 @@ namespace rag {
 			void set_rule(std::string rule);
 
 			void run();
-
-		protected:
-
-
 	};
 
 #define _LIB_RAG_AGGREGATOR_LIST_T_

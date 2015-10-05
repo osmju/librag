@@ -1,6 +1,7 @@
 #include <iostream>
 #include <aggregator.h>
 #include <aggregator_list.h>
+#include <aggregator_xml.h>
 
 using namespace std;
 
