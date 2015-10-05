@@ -135,7 +135,9 @@ void RankAggregator<T>::build_ranking_map() {
 
 template <class T>
 const typename RankAggregator<T>::rlist RankAggregator<T>::get_aggregation() const {
-	return aggregated_list_;
+	RankAggregator<T>::rlist result = aggregated_list_;
+
+	return result;
 }
 
 /*=============================================================================*/
