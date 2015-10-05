@@ -1,5 +1,6 @@
 #include <iostream>
 #include <aggregator.h>
+#include <aggregator_list.h>
 
 using namespace std;
 

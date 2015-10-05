@@ -23,14 +23,6 @@ namespace rag {
 
 			RList get_result();
 
-			virtual void set_rule(std::string rule) {
-				throw std::runtime_error("Not implemented.");
-			}
-
-			virtual void set_xml_rules(std::string path) {
-				throw std::runtime_error("Not implemented.");
-			}
-
 			virtual void run() = 0;
 
 		protected:
