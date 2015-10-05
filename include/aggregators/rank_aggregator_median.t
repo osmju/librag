@@ -26,7 +26,7 @@ void AggregatorMedian<T>::aggregate() {
 
 	for (auto item : Base::objects_ranks_) {
 		T key = item.first;
-		typename Base::ivectptr ranks = item.second;
+		ivectptr ranks = item.second;
 		float ranks_median = median(ranks);
 
 		typename Base::object_score current_item_score(ranks_median, key);
@@ -45,7 +45,7 @@ void AggregatorMedian<T>::aggregate() {
 /*=============================================================================*/
 
 template <class T>
-float AggregatorMedian<T>::median(const typename Base::ivectptr ranks) const {
+float AggregatorMedian<T>::median(const ivectptr ranks) const {
 	int nb_ranks = ranks->size();
 	float final_rank = 0.0;
 

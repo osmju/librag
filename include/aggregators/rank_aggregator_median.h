@@ -22,7 +22,7 @@ namespace rag {
 
 			virtual void aggregate();
 
-			float median(const typename Base::ivectptr ranks) const;
+			float median(const ivectptr ranks) const;
 
 	};
 

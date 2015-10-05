@@ -15,17 +15,34 @@ namespace rag {
 	template <class T>
 	class Aggregator {
 		public:
+			typedef typename rag::RankAggregator<T>::rlist RList;
 
 			virtual ~Aggregator();
 
-			void add_ranking(rag::RankAggregator<T>::rlist* list, std::string name);
+			void add_ranking(const RList* list, std::string name);
+
+			RList get_result();
+
+			virtual void set_rule(std::string rule) {
+				throw std::runtime_error("Not implemented.");
+			}
+
+			virtual void set_xml_rules(std::string path) {
+				throw std::runtime_error("Not implemented.");
+			}
 
 			virtual void run() = 0;
 
+		protected:
+			RList final_aggregation_;
+			std::vector<const RList*> inputs_;
+			svect inputs_names_;
 
 	};
-}
 
-
+#define _LIB_RAG_AGGREGATOR_T_
+#include "aggregator.t"
+#undef _LIB_RAG_AGGREGATOR_T_
+} /* namespace rag */
 
 #endif /* AGGREGATOR_H_ */

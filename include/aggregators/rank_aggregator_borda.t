@@ -26,7 +26,7 @@ void AggregatorBorda<T>::aggregate() {
 
 	for (auto item : Base::objects_ranks_) {
 		T key = item.first;
-		typename Base::ivectptr ranks = item.second;
+		ivectptr ranks = item.second;
 		int nb_ranks = ranks->size();
 		int borda_score = 0;
 

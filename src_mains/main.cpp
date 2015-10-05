@@ -1,5 +1,5 @@
 #include <iostream>
-#include <aggregators/rank_aggregator.h>
+#include <aggregator.h>
 
 using namespace std;
 

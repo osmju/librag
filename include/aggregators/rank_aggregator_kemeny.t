@@ -74,8 +74,8 @@ bool AggregatorKemeny<T>::is_preferred(T item1, T item2) {
 	}
 
 	int pref_accumulator = 0;
-	typename Base::ivectptr ranks_item1 = Base::objects_ranks_[item1];
-	typename Base::ivectptr ranks_item2 = Base::objects_ranks_[item2];
+	ivectptr ranks_item1 = Base::objects_ranks_[item1];
+	ivectptr ranks_item2 = Base::objects_ranks_[item2];
 
 	for (int i = 0; i < Base::nb_rankings_; ++i) {
 		// check whether item1 is preferred over item2 in each list

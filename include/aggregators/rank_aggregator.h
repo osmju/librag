@@ -23,7 +23,6 @@ namespace rag {
 	class RankAggregator {
 		public:
 			typedef std::shared_ptr<RankAggregator>		ptr;
-			typedef std::shared_ptr<ivect>							ivectptr;
 			typedef std::vector<T> 		   							rlist;
 			typedef std::shared_ptr<rlist>							rlist_ptr;
 			typedef std::vector<const rlist*>					rmatrix;
