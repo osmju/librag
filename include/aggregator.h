@@ -29,6 +29,7 @@ namespace rag {
 			RList final_aggregation_;
 			std::vector<const RList*> inputs_;
 			svect inputs_names_;
+			typename RankAggregator<T>::ptr rank_aggregator_;
 
 	};
 

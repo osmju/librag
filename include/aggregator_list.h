@@ -25,7 +25,7 @@ namespace rag {
 			void run();
 
 		protected:
-			typename RankAggregator<T>::ptr rank_aggregator_;
+
 
 	};
 

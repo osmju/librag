@@ -7,17 +7,22 @@ using namespace std;
 /*=============================================================================*/
 
 template <class T>
+AggregatorList<T>::~AggregatorList() {}
+
+/*=============================================================================*/
+
+template <class T>
 AggregatorList<T>::AggregatorList(string rule) {
-	rank_aggregator_ = RankAggregator<T>::create(rule);
+	Base::rank_aggregator_ = RankAggregator<T>::create(rule);
 
 	if (rule == "kemeny-median") {
-		rank_aggregator_->set_initial_aggregation("median");
+		Base::rank_aggregator_->set_initial_aggregation("median");
 	}
 	else if (rule == "kemeny-mean") {
-		rank_aggregator_->set_initial_aggregation("mean");
+		Base::rank_aggregator_->set_initial_aggregation("mean");
 	}
 	else if (rule == "kemeny-borda") {
-		rank_aggregator_->set_initial_aggregation("borda");
+		Base::rank_aggregator_->set_initial_aggregation("borda");
 	}
 }
 
@@ -31,13 +36,15 @@ void AggregatorList<T>::run() {
 	}
 	else {
 		for (int i = 0; i < Base::inputs_.size(); ++i) {
-			rank_aggregator_->add_ranking(Base::inputs_[i]);
+			Base::rank_aggregator_->add_ranking(Base::inputs_[i]);
 		}
 	}
 
-
-
+	/* run aggregation */
+	Base::rank_aggregator_->aggregate();
 }
+
+/*=============================================================================*/
 
 
 #else		/* _LIB_RAG_AGGREGATOR_LIST_T_ */

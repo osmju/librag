@@ -26,7 +26,7 @@ inline void Aggregator<T>::add_ranking(const RList* list, string name) {
 
 template <class T>
 inline typename Aggregator<T>::RList Aggregator<T>::get_result() {
-  return final_aggregation_;
+  return rank_aggregator_->get_aggregation();
 }
 
 /*=============================================================================*/
