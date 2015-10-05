@@ -7,9 +7,8 @@
 #ifndef AGGREGATOR_LIST_H_
 #define AGGREGATOR_LIST_H_
 
-#include "aggregator.h"
-
 namespace rag {
+	template <class T> class Aggregator;
 
 	template <class T>
 	class AggregatorList : public Aggregator<T> {

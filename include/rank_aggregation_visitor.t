@@ -1,27 +1,19 @@
-//! \file 				  rank_aggregation_visitor.cpp
-//! \brief				brief description here
-//!
-//!	\author		josmalskyj
-//! \date				Sep 29, 2015
-#include <iostream>
-#include <string>
-#include <boost/lexical_cast.hpp>
-#include "rank_aggregation_visitor.h"
-
-using namespace std;
-using namespace BGS_Platform::libdataset;
+#ifdef _LIB_RAG_RANK_AGGREGATION_VISITOR_T_
 
 /*=============================================================================*/
 
-void RankAggregationVisitor::startVisit() {}
+template <class T>
+void RankAggregationVisitor<T>::startVisit() {}
 
 /*=============================================================================*/
 
-void RankAggregationVisitor::endVisit() {}
+template <class T>
+void RankAggregationVisitor<T>::endVisit() {}
 
 /*=============================================================================*/
 
-void RankAggregationVisitor::cleanup() {
+template <class T>
+void RankAggregationVisitor<T>::cleanup() {
 	int nb_pointers = list_pointers_.size();
 
   for (int i = 0; i < nb_pointers; ++i) {
@@ -31,14 +23,15 @@ void RankAggregationVisitor::cleanup() {
 
 /*=============================================================================*/
 
-void RankAggregationVisitor::visitElementNode(XMLNode& node, size_t) {
+template <class T>
+void RankAggregationVisitor<T>::visitElementNode(XMLNode& node, size_t) {
   if (node.getName() == "rule") {
     XMLAttr attr = node.getAttributes();
-    string aggregation_rule = attr.getContent();
+    std::string aggregation_rule = attr.getContent();
 
     // create new rank aggregator
-    RAggregator::ptr aggregator = rag::RankAggregator<int>::create(aggregation_rule);
-    RAggregator::rlist* node_list = new RAggregator::rlist;
+    typename RAggregator::ptr aggregator = RAggregator::create(aggregation_rule);
+    typename RAggregator::rlist* node_list = new typename RAggregator::rlist;
 
     // push pointer to list so that it can be easily deleted later
     list_pointers_.push_back(node_list);
@@ -53,7 +46,8 @@ void RankAggregationVisitor::visitElementNode(XMLNode& node, size_t) {
       }
 
       if (currentChild.getName() == "rule") {
-        RAggregator::rlist* child_list = (RAggregator::rlist*)(currentChild.getPrivate());
+        typename RAggregator::rlist* child_list =
+        		(typename RAggregator::rlist*)(currentChild.getPrivate());
 
         aggregator->add_ranking(child_list);
       }
@@ -66,7 +60,7 @@ void RankAggregationVisitor::visitElementNode(XMLNode& node, size_t) {
 
     aggregator->aggregate();
 
-    const RAggregator::rlist result = aggregator->get_aggregation();
+    const typename RAggregator::rlist result = aggregator->get_aggregation();
     int result_size = result.size();
 
     for (int i = 0; i < result_size; ++i) {
@@ -79,82 +73,113 @@ void RankAggregationVisitor::visitElementNode(XMLNode& node, size_t) {
 
 /*=============================================================================*/
 
-void RankAggregationVisitor::visitAttributeNode(XMLAttr&, size_t) {}
+template <class T>
+void RankAggregationVisitor<T>::visitAttributeNode(XMLAttr&, size_t) {}
 
 /*=============================================================================*/
 
-void RankAggregationVisitor::visitTextNode(XMLNode&, size_t) {}
+template <class T>
+void RankAggregationVisitor<T>::visitTextNode(XMLNode&, size_t) {}
 
 /*=============================================================================*/
 
-void RankAggregationVisitor::visitCDATASectionNode(XMLNode&, size_t) {}
+template <class T>
+void RankAggregationVisitor<T>::visitCDATASectionNode(XMLNode&, size_t) {}
 
 /*=============================================================================*/
 
-void RankAggregationVisitor::visitEntityRefNode(XMLNode&, size_t) {}
+template <class T>
+void RankAggregationVisitor<T>::visitEntityRefNode(XMLNode&, size_t) {}
 
 /*=============================================================================*/
 
-void RankAggregationVisitor::visitEntityNode(XMLNode&, size_t) {}
+template <class T>
+void RankAggregationVisitor<T>::visitEntityNode(XMLNode&, size_t) {}
 
 /*=============================================================================*/
 
-void RankAggregationVisitor::visitPINode(XMLNode&, size_t) {}
+template <class T>
+void RankAggregationVisitor<T>::visitPINode(XMLNode&, size_t) {}
 
 /*=============================================================================*/
 
-void RankAggregationVisitor::visitCommentNode(XMLNode&, size_t) {}
+template <class T>
+void RankAggregationVisitor<T>::visitCommentNode(XMLNode&, size_t) {}
 
 /*=============================================================================*/
 
-void RankAggregationVisitor::visitDocumentNode(XMLNode&, size_t) {}
+template <class T>
+void RankAggregationVisitor<T>::visitDocumentNode(XMLNode&, size_t) {}
 
 /*=============================================================================*/
 
-void RankAggregationVisitor::visitDocumentTypeNode(XMLNode&, size_t) {}
+template <class T>
+void RankAggregationVisitor<T>::visitDocumentTypeNode(XMLNode&, size_t) {}
 
 /*=============================================================================*/
 
-void RankAggregationVisitor::visitDocumentFragNode(XMLNode&, size_t) {}
+template <class T>
+void RankAggregationVisitor<T>::visitDocumentFragNode(XMLNode&, size_t) {}
 
 /*=============================================================================*/
 
-void RankAggregationVisitor::visitNotationNode(XMLNode&, size_t) {}
+template <class T>
+void RankAggregationVisitor<T>::visitNotationNode(XMLNode&, size_t) {}
 
 /*=============================================================================*/
 
-void RankAggregationVisitor::visitHTMLDocumentNode(XMLNode&, size_t) {}
+template <class T>
+void RankAggregationVisitor<T>::visitHTMLDocumentNode(XMLNode&, size_t) {}
 
 /*=============================================================================*/
 
-void RankAggregationVisitor::visitDTDNode(XMLNode&, size_t) {}
+template <class T>
+void RankAggregationVisitor<T>::visitDTDNode(XMLNode&, size_t) {}
 
 /*=============================================================================*/
 
-void RankAggregationVisitor::visitElementDecl(XMLNode&, size_t) {}
+template <class T>
+void RankAggregationVisitor<T>::visitElementDecl(XMLNode&, size_t) {}
 
 /*=============================================================================*/
 
-void RankAggregationVisitor::visitAttributeDecl(XMLNode&, size_t) {}
+template <class T>
+void RankAggregationVisitor<T>::visitAttributeDecl(XMLNode&, size_t) {}
 
 /*=============================================================================*/
 
-void RankAggregationVisitor::visitEntityDecl(XMLNode&, size_t) {}
+template <class T>
+void RankAggregationVisitor<T>::visitEntityDecl(XMLNode&, size_t) {}
 
 /*=============================================================================*/
 
-void RankAggregationVisitor::visitNamespaceDecl(XMLNode&, size_t) {}
+template <class T>
+void RankAggregationVisitor<T>::visitNamespaceDecl(XMLNode&, size_t) {}
 
 /*=============================================================================*/
 
-void RankAggregationVisitor::visitXIncludeStart(XMLNode&, size_t) {}
+template <class T>
+void RankAggregationVisitor<T>::visitXIncludeStart(XMLNode&, size_t) {}
 
 /*=============================================================================*/
 
-void RankAggregationVisitor::visitXIncludeEnd(XMLNode&, size_t) {}
+template <class T>
+void RankAggregationVisitor<T>::visitXIncludeEnd(XMLNode&, size_t) {}
 
 /*=============================================================================*/
 
-void RankAggregationVisitor::visitDOCBDocumentNode(XMLNode&, size_t) {}
+template <class T>
+void RankAggregationVisitor<T>::visitDOCBDocumentNode(XMLNode&, size_t) {}
 
 /*=============================================================================*/
+
+template <class T>
+void RankAggregationVisitor<T>::add_input_list(const typename RAggregator::rlist* input_list) {
+	inputs_.push_back(input_list);
+}
+
+/*=============================================================================*/
+
+#else		/* _LIB_RAG_RANK_AGGREGATION_VISITOR_T_ */
+#error
+#endif /* _LIB_RAG_RANK_AGGREGATION_VISITOR_T_ */

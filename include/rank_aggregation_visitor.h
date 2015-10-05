@@ -7,14 +7,19 @@
 #ifndef RANK_AGGREGATION_VISITOR_H_
 #define RANK_AGGREGATION_VISITOR_H_
 
+#include <iostream>
+#include <string>
 #include <vector>
+#include <boost/lexical_cast.hpp>
 #include "libdataset/xml/XMLVisitor.h"
 #include "aggregators/rank_aggregator.h"
 
 namespace BGS_Platform {
   namespace libdataset {
+
+  	template <class T>
     class RankAggregationVisitor : public XMLVisitor {
-    		typedef rag::RankAggregator<int> RAggregator;
+    		typedef rag::RankAggregator<T> RAggregator;
 
       public:
         typedef XMLVisitor                                                Base;
@@ -71,13 +76,7 @@ namespace BGS_Platform {
 
         virtual void visitDOCBDocumentNode(XMLNode& node, size_t level = 0);
 
-        void add_input_list(const RAggregator::rlist* input_list) {
-        	inputs_.push_back(input_list);
-        }
-
-        std::vector<const RAggregator::rlist*>& get_inputs_ptrs() {
-        	return inputs_;
-        }
+        void add_input_list(const typename RAggregator::rlist* input_list);
 
         void cleanup();
 
@@ -85,10 +84,14 @@ namespace BGS_Platform {
         void closeLastElement(size_t level);
 
       private:
-        std::vector<RAggregator::rlist*> list_pointers_;
-        std::vector<const RAggregator::rlist*> inputs_;
+        std::vector<typename RAggregator::rlist*> list_pointers_;
+        std::vector<const typename RAggregator::rlist*> inputs_;
 
     };
+
+#define _LIB_RAG_RANK_AGGREGATION_VISITOR_T_
+#include "rank_aggregation_visitor.t"
+#undef _LIB_RAG_RANK_AGGREGATION_VISITOR_T_
   } /* _NS_libdataset_ */
 } /* _NS_BGS_Platform_ */
 

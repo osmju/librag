@@ -7,12 +7,11 @@
 #ifndef AGGREGATOR_XML_H_
 #define AGGREGATOR_XML_H_
 
-#include "aggregator.h"
 #include "libdataset/libdataset.h"
-#include "aggregator.h"
 #include "rank_aggregation_visitor.h"
 
 namespace rag {
+	template <class T> class Aggregator;
 
 	template <class T>
 	class AggregatorXML : public Aggregator<T> {

@@ -20,7 +20,7 @@ AggregatorXML<T>::~AggregatorXML() {}
 template <class T>
 void AggregatorXML<T>::run() {
 	/* create XML aggregator visitor */
-	BGS_Platform::libdataset::RankAggregationVisitor visitor;
+	BGS_Platform::libdataset::RankAggregationVisitor<T> visitor;
 
 	/* first add inputs lists to Rank Aggregator */
 	if (Base::inputs_.size() <= 0) {

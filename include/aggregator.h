@@ -8,14 +8,18 @@
 #ifndef AGGREGATOR_H_
 #define AGGREGATOR_H_
 
+#include <iostream>
 #include "aggregators/rank_aggregator.h"
+#include "aggregator_list.h"
+#include "aggregator_xml.h"
 
 namespace rag {
 
 	template <class T>
 	class Aggregator {
 		public:
-			typedef typename rag::RankAggregator<T>::rlist RList;
+			typedef std::shared_ptr<Aggregator>							ptr;
+			typedef typename rag::RankAggregator<T>::rlist 	RList;
 
 			virtual ~Aggregator();
 
@@ -24,6 +28,8 @@ namespace rag {
 			RList get_result();
 
 			virtual void run() = 0;
+
+			static ptr create(std::string name, std::string option);
 
 		protected:
 			RList final_aggregation_;

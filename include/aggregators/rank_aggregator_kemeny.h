@@ -8,9 +8,10 @@
 #ifndef RANK_AGGREGATOR_KEMENY_H_
 #define RANK_AGGREGATOR_KEMENY_H_
 
-#include "aggregators/rank_aggregator.h"
+#include "types.h"
 
 namespace rag {
+	template <class T> class RankAggregator;
 
 	template <class T>
 	class AggregatorKemeny : public RankAggregator<T> {
@@ -31,9 +32,9 @@ namespace rag {
 			std::string initial_aggregation_;
 	};
 
-}
-
+#define _LIB_RAG_RANK_AGGREGATOR_KEMENY_T_
 #include "aggregators/rank_aggregator_kemeny.t"
-
+#undef _LIB_RAG_RANK_AGGREGATOR_KEMENY_T_
+}
 
 #endif /* RANK_AGGREGATOR_KEMENY_H_ */

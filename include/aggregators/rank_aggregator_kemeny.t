@@ -1,7 +1,4 @@
-#include <iostream>
-
-using namespace std;
-using namespace rag;
+#ifdef _LIB_RAG_RANK_AGGREGATOR_KEMENY_T_
 
 /*=============================================================================*/
 
@@ -31,12 +28,13 @@ void AggregatorKemeny<T>::aggregate() {
 	}
 
 	initial_aggregator->aggregate();
-	const typename Base::rlist median_aggregation = initial_aggregator->get_aggregation();
+
+	const typename Base::rlist init_aggregation = initial_aggregator->get_aggregation();
 
 	// copy aggregation in new list
 	typename Base::rlist lcopy;
 
-	for (T item : median_aggregation) {
+	for (T item : init_aggregation) {
 		lcopy.push_back(item);
 	}
 
@@ -95,7 +93,7 @@ void AggregatorKemeny<T>::swap(typename Base::rlist& list, int index1, int index
 	int list_size = list.size();
 
 	if (index1 < 0 || index1 >= list_size || index2 < 0 || index2 >= list_size)
-		throw runtime_error("Out of list bounds");
+		throw std::runtime_error("Out of list bounds");
 
 	T temp = list[index1];
 	list[index1] = list[index2];
@@ -105,9 +103,12 @@ void AggregatorKemeny<T>::swap(typename Base::rlist& list, int index1, int index
 /*=============================================================================*/
 
 template <class T>
-void AggregatorKemeny<T>::set_initial_aggregation(string initial_aggregation) {
+void AggregatorKemeny<T>::set_initial_aggregation(std::string initial_aggregation) {
 		initial_aggregation_ = initial_aggregation;
 }
 
 /*=============================================================================*/
 
+#else  /* _LIB_RAG_RANK_AGGREGATOR_KEMENY_T_ */
+#error
+#endif  /* _LIB_RAG_RANK_AGGREGATOR_KEMENY_T_ */

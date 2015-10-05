@@ -6,9 +6,10 @@
 #ifndef RANK_AGGREGATOR_MEAN_H_
 #define RANK_AGGREGATOR_MEAN_H_
 
-#include "aggregators/rank_aggregator.h"
+#include "types.h"
 
 namespace rag {
+	template <class T> class RankAggregator;
 
 	template <class T>
 	class AggregatorMean : public RankAggregator<T> {
@@ -21,9 +22,9 @@ namespace rag {
 			virtual void aggregate();
 	};
 
-}
-
+#define _LIB_RAG_RANK_AGGREGATOR_MEAN_T_
 #include "aggregators/rank_aggregator_mean.t"
-
+#undef _LIB_RAG_RANK_AGGREGATOR_MEAN_T_
+}
 
 #endif /* RANK_AGGREGATOR_MEAN_H_ */

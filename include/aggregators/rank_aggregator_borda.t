@@ -1,8 +1,4 @@
-#include <iostream>
-#include "aggregators/rank_aggregator_borda.h"
-
-using namespace std;
-using namespace rag;
+#ifdef _LIB_RAG_RANK_AGGREGATOR_BORDA_T_
 
 /*=============================================================================*/
 
@@ -49,3 +45,7 @@ void AggregatorBorda<T>::aggregate() {
 }
 
 /*=============================================================================*/
+
+#else  /* _LIB_RAG_RANK_AGGREGATOR_BORDA_T_ */
+#error
+#endif /* _LIB_RAG_RANK_AGGREGATOR_BORDA_T_ */

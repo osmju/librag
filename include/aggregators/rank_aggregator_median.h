@@ -8,9 +8,10 @@
 #ifndef RANK_AGGREGATOR_MEDIAN_H_
 #define RANK_AGGREGATOR_MEDIAN_H_
 
-#include "rank_aggregator.h"
+#include "types.h"
 
 namespace rag {
+	template <class T> class RankAggregator;
 
 	template <class T>
 	class AggregatorMedian : public RankAggregator<T> {
@@ -18,6 +19,7 @@ namespace rag {
 			typedef RankAggregator<T> Base;
 
 			AggregatorMedian();
+
 			virtual ~AggregatorMedian();
 
 			virtual void aggregate();
@@ -26,10 +28,9 @@ namespace rag {
 
 	};
 
-}
-
+#define _LIB_RAG_RANK_AGGREATOR_MEDIAN_T_
 #include "aggregators/rank_aggregator_median.t"
-
-
+#undef _LIB_RAG_RANK_AGGREATOR_MEDIAN_T_
+}
 
 #endif /* RANK_AGGREGATOR_MEDIAN_H_ */

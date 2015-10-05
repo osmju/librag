@@ -19,7 +19,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/random.hpp>
 #include <boost/program_options.hpp>
-#include <aggregators/rank_aggregator.h>
+#include <aggregator.h>
 
 using namespace std;
 using namespace rag;
@@ -27,19 +27,16 @@ using namespace rag;
 int main(int argc, char** argv) {
 	cout << "LibRAG 0.1 Testing" << endl;
 
-	typedef RankAggregator<string>::rlist rk_list;
+	Aggregator<string>::ptr aggregator = Aggregator<string>::create("list", "kemeny-median");
+	Aggregator<string>::RList* list1 = new Aggregator<string>::RList;
+	Aggregator<string>::RList* list2 = new Aggregator<string>::RList;
+	Aggregator<string>::RList* list3 = new Aggregator<string>::RList;
 
-	RankAggregator<string>::ptr aggregator = RankAggregator<string>::create("median");
-	//aggregator->set_initial_aggregation("mean");
-
-	rk_list*  list = new rk_list;
-
-	list->push_back("Melissa");
-	list->push_back("Elodie");
-	list->push_back("Nathalie");
-	list->push_back("Enora");
-
-	rk_list*  list2 = new rk_list;
+	list1->push_back("Melissa");
+	list1->push_back("Elodie");
+	list1->push_back("Nathalie");
+	list1->push_back("Enora");
+	list1->push_back("Melanie");
 
 	list2->push_back("Enora");
 	list2->push_back("Melissa");
@@ -47,26 +44,18 @@ int main(int argc, char** argv) {
 	list2->push_back("Nathalie");
 	list2->push_back("Melanie");
 
-	rk_list*  list3 = new rk_list;
-
 	list3->push_back("Elodie");
 	list3->push_back("Melanie");
 	list3->push_back("Nathalie");
 	list3->push_back("Enora");
 	list3->push_back("Melissa");
 
-	aggregator->add_ranking(list);
-	aggregator->add_ranking(list2);
-	aggregator->add_ranking(list3);
+	aggregator->add_ranking(list1, "list1");
+	aggregator->add_ranking(list2, "list2");
+	aggregator->add_ranking(list3, "list3");
+	aggregator->run();
 
-	int nb_rankings = aggregator->nb_rankings();
-
-	cout << "Max length: " << aggregator->lists_max_size() << endl;
-	cout << "Number of rankings: " << nb_rankings << endl;
-
-	aggregator->aggregate();
-
-	const rk_list& aggregation = aggregator->get_aggregation();
+	Aggregator<string>::RList aggregation = aggregator->get_result();
 	int rank = 1;
 
 	cout << endl;
@@ -76,7 +65,7 @@ int main(int argc, char** argv) {
 		cout << rank++ << " :: " << item << endl;
 	}
 
-	delete(list);
+	delete(list1);
 	delete(list2);
 	delete(list3);
 

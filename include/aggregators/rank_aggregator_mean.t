@@ -1,8 +1,4 @@
-#include <iostream>
-#include "aggregators/rank_aggregator_mean.h"
-
-using namespace std;
-using namespace rag;
+#ifdef _LIB_RAG_RANK_AGGREGATOR_MEAN_T_
 
 /*=============================================================================*/
 
@@ -51,3 +47,7 @@ void AggregatorMean<T>::aggregate() {
 }
 
 /*=============================================================================*/
+
+#else  /* _LIB_RAG_RANK_AGGREGATOR_MEAN_T_ */
+#error
+#endif /* _LIB_RAG_RANK_AGGREGATOR_MEAN_T_ */

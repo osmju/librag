@@ -1,8 +1,4 @@
-#include <iostream>
-#include "aggregators/rank_aggregator_median.h"
-
-using namespace std;
-using namespace rag;
+#ifdef _LIB_RAG_RANK_AGGREATOR_MEDIAN_T_
 
 /*=============================================================================*/
 
@@ -62,3 +58,7 @@ float AggregatorMedian<T>::median(const ivectptr ranks) const {
 }
 
 /*=============================================================================*/
+
+#else  /* _LIB_RAG_RANK_AGGREATOR_MEDIAN_T_ */
+#error
+#endif /* _LIB_RAG_RANK_AGGREATOR_MEDIAN_T_ */

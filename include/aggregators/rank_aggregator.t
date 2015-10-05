@@ -1,12 +1,4 @@
-#include <iostream>
-#include <algorithm>
-#include "aggregators/rank_aggregator_borda.h"
-#include "aggregators/rank_aggregator_mean.h"
-#include "aggregators/rank_aggregator_median.h"
-#include "aggregators/rank_aggregator_kemeny.h"
-
-using namespace std;
-using namespace rag;
+#ifdef _LIB_RAG_RANK_AGGREGATOR_T_
 
 /*=============================================================================*/
 
@@ -32,7 +24,7 @@ void RankAggregator<T>::add_ranking(const rlist* ranking) {
 template <class T>
 const typename RankAggregator<T>::rlist* RankAggregator<T>::get_ranking(int ranking_id) const {
 	if (ranking_id > nb_rankings_)
-		throw runtime_error("Ranking index is out of bounds.");
+		throw std::runtime_error("Ranking index is out of bounds.");
 
 	return rankings_[ranking_id];
 }
@@ -47,18 +39,19 @@ int RankAggregator<T>::nb_rankings() const {
 /*=============================================================================*/
 
 template <class T>
-typename RankAggregator<T>::ptr RankAggregator<T>::create(string name) {
+typename RankAggregator<T>::ptr RankAggregator<T>::create(std::string name) {
 	if (name == "borda") {
-		return RankAggregator<T>::ptr(new AggregatorBorda<T>());
+		return typename RankAggregator<T>::ptr(new AggregatorBorda<T>());
 	}
 	else if (name == "mean") {
-		return RankAggregator<T>::ptr(new AggregatorMean<T>());
+		return typename RankAggregator<T>::ptr(new AggregatorMean<T>());
 	}
 	else if (name == "median") {
-		return RankAggregator<T>::ptr(new AggregatorMedian<T>());
+		return typename RankAggregator<T>::ptr(new AggregatorMedian<T>());
 	}
 	else if (name == "kemeny-median" || 	name == "kemeny-mean" || name == "kemeny-borda") {
-		RankAggregator<T>::ptr aggregator = RankAggregator<T>::ptr(new AggregatorKemeny<T>());
+		typename RankAggregator<T>::ptr aggregator =
+				typename RankAggregator<T>::ptr(new AggregatorKemeny<T>());
 
 		if (name == "kemeny-median")
 			aggregator->set_initial_aggregation("median");
@@ -70,7 +63,7 @@ typename RankAggregator<T>::ptr RankAggregator<T>::create(string name) {
 		return aggregator;
 	}
 	else {
-		throw runtime_error("Wrong aggregator identifier.");
+		throw std::runtime_error("Wrong aggregator identifier.");
 	}
 }
 
@@ -110,7 +103,7 @@ void RankAggregator<T>::build_ranking_map() {
 				ivectptr ranks = objects_ranks_.at(key);
 				ranks->push_back(current_rank);
 			}
-			catch (out_of_range& err) {
+			catch (std::out_of_range& err) {
 				// if the key does not exist, create an entry with that key
 				ivectptr ranks = ivectptr(new ivect);
 
@@ -153,3 +146,7 @@ typename RankAggregator<T>::rlist_ptr RankAggregator<T>::new_rlist() {
 }
 
 /*=============================================================================*/
+
+#else  /* _LIB_RAG_RANK_AGGREGATOR_T_ */
+#error
+#endif /* _LIB_RAG_RANK_AGGREGATOR_T_ */
