@@ -9,6 +9,8 @@
 
 #include "aggregator.h"
 #include "libdataset/libdataset.h"
+#include "aggregator.h"
+#include "rank_aggregation_visitor.h"
 
 namespace rag {
 
@@ -20,6 +22,8 @@ namespace rag {
 			AggregatorXML(std::string path_xml);
 
 			virtual ~AggregatorXML();
+
+			void run();
 
 		protected:
 			BGS_Platform::libdataset::XMLDocument xml_rules_;

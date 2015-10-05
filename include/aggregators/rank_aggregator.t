@@ -57,8 +57,17 @@ typename RankAggregator<T>::ptr RankAggregator<T>::create(string name) {
 	else if (name == "median") {
 		return RankAggregator<T>::ptr(new AggregatorMedian<T>());
 	}
-	else if (name == "kemeny") {
-		return RankAggregator<T>::ptr(new AggregatorKemeny<T>());
+	else if (name == "kemeny-median" || 	name == "kemeny-mean" || name == "kemeny-borda") {
+		RankAggregator<T>::ptr aggregator = RankAggregator<T>::ptr(new AggregatorKemeny<T>());
+
+		if (name == "kemeny-median")
+			aggregator->set_initial_aggregation("median");
+		else if (name == "kemeny-mean")
+			aggregator->set_initial_aggregation("mean");
+		else if (name == "kemeny-borda")
+			aggregator->set_initial_aggregation("borda");
+
+		return aggregator;
 	}
 	else {
 		throw runtime_error("Wrong aggregator identifier.");
