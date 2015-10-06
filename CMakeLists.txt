@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 2.6)
 set(project_name "LibRAG")      					## change project name here
 set(library_name "rag")     						## change project library name here
 set(install_path_linux "/home/josmalskyj/libs/rag")
-set(install_path_osx "/Users/josmalskyj/libs/rag")
+set(install_path_osx "/Users/osmju/libs/rag")
 
 
 # Project name
