@@ -4,7 +4,9 @@
 
 template <class T>
 RankAggregator<T>::RankAggregator()
-: nb_rankings_(0) {}
+: nb_rankings_(0) {
+	aggregated_list_ = rlist_ptr(new rlist);
+}
 
 /*=============================================================================*/
 
@@ -134,9 +136,8 @@ void RankAggregator<T>::build_ranking_map() {
 /*=============================================================================*/
 
 template <class T>
-const typename RankAggregator<T>::rlist RankAggregator<T>::get_aggregation() const {
-	RankAggregator<T>::rlist result = aggregated_list_;
-
+typename RankAggregator<T>::rlist_ptr RankAggregator<T>::get_aggregation() const {
+	RankAggregator<T>::rlist_ptr result = aggregated_list_;
 	return result;
 }
 

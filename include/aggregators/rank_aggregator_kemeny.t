@@ -29,12 +29,12 @@ void AggregatorKemeny<T>::aggregate() {
 
 	initial_aggregator->aggregate();
 
-	const typename Base::rlist init_aggregation = initial_aggregator->get_aggregation();
+	const typename Base::rlist_ptr init_aggregation = initial_aggregator->get_aggregation();
 
 	// copy aggregation in new list
 	typename Base::rlist lcopy;
 
-	for (T item : init_aggregation) {
+	for (T item : *init_aggregation) {
 		lcopy.push_back(item);
 	}
 
@@ -55,10 +55,10 @@ void AggregatorKemeny<T>::aggregate() {
 		}
 	}
 
-	Base::aggregated_list_.clear();
+	Base::aggregated_list_->clear();
 
 	for (T item : lcopy) {
-		Base::aggregated_list_.push_back(item);
+		Base::aggregated_list_->push_back(item);
 	}
 }
 

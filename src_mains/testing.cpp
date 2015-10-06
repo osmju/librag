@@ -27,7 +27,7 @@ using namespace rag;
 int main(int argc, char** argv) {
 	cout << "LibRAG 0.1 Testing" << endl;
 
-	Aggregator<string>::ptr aggregator = Aggregator<string>::create("xml", "/home/josmalskyj/dummy.xml");
+	Aggregator<string>::ptr aggregator = Aggregator<string>::create("list", "median");
 	Aggregator<string>::RList* list1 = new Aggregator<string>::RList;
 	Aggregator<string>::RList* list2 = new Aggregator<string>::RList;
 	Aggregator<string>::RList* list3 = new Aggregator<string>::RList;
@@ -55,15 +55,13 @@ int main(int argc, char** argv) {
 	aggregator->add_ranking(list3, "list3");
 	aggregator->run();
 
-	std::cout << "Constructor\n";
-	Aggregator<string>::RList aggregation = aggregator->get_result(); // BUG IS HERE !
-
+	Aggregator<string>::RList_ptr aggregation = aggregator->get_result();
 	int rank = 1;
 
 	cout << endl;
 	cout << "Final aggregation:\n\n";
 
-	for (string item : aggregation) {
+	for (string item : *aggregation) {
 		cout << rank++ << " :: " << item << endl;
 	}
 

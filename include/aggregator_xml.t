@@ -8,7 +8,7 @@
 
 template <class T>
 AggregatorXML<T>::AggregatorXML(string path_xml)
-: xml_rules_(path_xml) {}
+: Aggregator<T>(), xml_rules_(path_xml) {}
 
 /*=============================================================================*/
 
@@ -40,7 +40,7 @@ void AggregatorXML<T>::run() {
 	typename Base::RList* result = (typename Base::RList*)(root.getPrivate());
 
 	for (int i = 0; i < result->size(); ++i) {
-		Base::final_aggregation_.push_back(result->at(i));
+		Base::final_aggregation_->push_back(result->at(i));
 	}
 }
 

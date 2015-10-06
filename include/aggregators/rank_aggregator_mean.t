@@ -16,7 +16,7 @@ AggregatorMean<T>::~AggregatorMean() {}
 template <class T>
 void AggregatorMean<T>::aggregate() {
 	Base::build_ranking_map();
-	Base::aggregated_list_.clear();
+	Base::aggregated_list_->clear();
 	typename Base::rating mean_scores;
 	int nb_objects = Base::lists_max_size();
 
@@ -42,7 +42,7 @@ void AggregatorMean<T>::aggregate() {
 	// now build final list
 	for (int i = 0; i < nb_objects; ++i) {
 		T object = std::get<1>(mean_scores[i]);
-		Base::aggregated_list_.push_back(object);
+		Base::aggregated_list_->push_back(object);
 	}
 }
 

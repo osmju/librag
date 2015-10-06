@@ -43,7 +43,7 @@ namespace rag {
 
 			const rlist* get_ranking(int ranking_id) const;
 
-			const rlist get_aggregation() const;
+			rlist_ptr get_aggregation() const;
 
 			int nb_rankings() const;
 
@@ -62,7 +62,7 @@ namespace rag {
 
 		protected:
 			rmatrix rankings_;
-			rlist aggregated_list_;
+			rlist_ptr aggregated_list_;
 			rankmap objects_ranks_;
 			int nb_rankings_;
 

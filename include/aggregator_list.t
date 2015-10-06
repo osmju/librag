@@ -42,6 +42,8 @@ void AggregatorList<T>::run() {
 
 	/* run aggregation */
 	Base::rank_aggregator_->aggregate();
+
+	Base::final_aggregation_ = Base::rank_aggregator_->get_aggregation();
 }
 
 /*=============================================================================*/

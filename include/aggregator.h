@@ -18,25 +18,27 @@ namespace rag {
 	template <class T>
 	class Aggregator {
 		public:
-			typedef std::shared_ptr<Aggregator>							ptr;
-			typedef typename rag::RankAggregator<T>::rlist 	RList;
+			typedef std::shared_ptr<Aggregator>									ptr;
+			typedef typename rag::RankAggregator<T>::rlist 			RList;
+			typedef typename rag::RankAggregator<T>::rlist_ptr 	RList_ptr;
 
 			virtual ~Aggregator();
 
 			void add_ranking(const RList* list, std::string name);
 
-			RList get_result();
+			virtual RList_ptr get_result();
 
 			virtual void run() = 0;
 
 			static ptr create(std::string name, std::string option);
 
 		protected:
-			RList final_aggregation_;
+			RList_ptr final_aggregation_;
 			std::vector<const RList*> inputs_;
 			svect inputs_names_;
 			typename RankAggregator<T>::ptr rank_aggregator_;
 
+			Aggregator();
 	};
 
 #define _LIB_RAG_AGGREGATOR_T_

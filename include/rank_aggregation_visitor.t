@@ -60,11 +60,11 @@ void RankAggregationVisitor<T>::visitElementNode(XMLNode& node, size_t) {
 
     aggregator->aggregate();
 
-    const typename RAggregator::rlist result = aggregator->get_aggregation();
-    int result_size = result.size();
+    const typename RAggregator::rlist_ptr result = aggregator->get_aggregation();
+    int result_size = result->size();
 
     for (int i = 0; i < result_size; ++i) {
-    	node_list->push_back(result.at(i));
+    	node_list->push_back(result->at(i));
     }
 
     node.setPrivate((void*)(node_list));

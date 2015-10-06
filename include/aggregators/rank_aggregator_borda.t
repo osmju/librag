@@ -16,7 +16,7 @@ AggregatorBorda<T>::~AggregatorBorda() {}
 template <class T>
 void AggregatorBorda<T>::aggregate() {
 	Base::build_ranking_map();
-	Base::aggregated_list_.clear();
+	Base::aggregated_list_->clear();
 	typename Base::rating borda_scores;
 	int nb_objects = Base::lists_max_size();
 
@@ -40,7 +40,7 @@ void AggregatorBorda<T>::aggregate() {
 	// now build final list
 	for (int i = 0; i < nb_objects; ++i) {
 		T object = std::get<1>(borda_scores[i]);
-		Base::aggregated_list_.push_back(object);
+		Base::aggregated_list_->push_back(object);
 	}
 }
 
