@@ -3,8 +3,10 @@ cmake_minimum_required(VERSION 2.6)
 # Parameters
 # ==========
 
-set(project_name "LibRAG")      ## change project name here
-set(library_name "rag")     ## change project library name here
+set(project_name "LibRAG")      					## change project name here
+set(library_name "rag")     						## change project library name here
+set(install_path_linux "/home/josmalskyj/libs/rag")
+set(install_path_osx "/Users/josmalskyj/libs/rag")
 
 
 # Project name
@@ -141,4 +143,15 @@ if (CMAKE_COMPILER_IS_GNUCXX)
     set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -pg")
 	list(APPEND CMAKE_CXX_FLAGS "-std=c++0x -fPIC ${CMAKE_CXX_FLAGS}")
 endif()
+
+# Installation
+# ============
+
+if (UNIX)
+	INSTALL(DIRECTORY include DESTINATION ${install_path_linux})
+	INSTALL(FILES build/librag.so DESTINATION ${install_path_linux})
+elseif (APPLE)
+	INSTALL(DIRECTORY include DESTINATION ${install_path_osx})
+	INSTALL(FILES build/librag.so DESTINATION ${install_path_osx})
+endif ()
 
