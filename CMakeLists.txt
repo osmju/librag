@@ -149,9 +149,9 @@ endif()
 
 if (UNIX)
 	INSTALL(DIRECTORY include DESTINATION ${install_path_linux})
-	INSTALL(FILES build/librag.so DESTINATION ${install_path_linux})
+	INSTALL(FILES build/librag.so DESTINATION ${install_path_linux}/lib)
 elseif (APPLE)
 	INSTALL(DIRECTORY include DESTINATION ${install_path_osx})
-	INSTALL(FILES build/librag.so DESTINATION ${install_path_osx})
+	INSTALL(FILES build/librag.so DESTINATION ${install_path_osx}/lib)
 endif ()
 
