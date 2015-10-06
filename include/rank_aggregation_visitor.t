@@ -27,7 +27,7 @@ template <class T>
 void RankAggregationVisitor<T>::visitElementNode(XMLNode& node, size_t) {
   if (node.getName() == "rule") {
     XMLAttr attr = node.getAttributes();
-    std::string aggregation_rule = attr.getContent();
+    std::string aggregation_rule = attr.getContent(); // rule stored in xml node
 
     // create new rank aggregator
     typename RAggregator::ptr aggregator = RAggregator::create(aggregation_rule);
@@ -40,6 +40,7 @@ void RankAggregationVisitor<T>::visitElementNode(XMLNode& node, size_t) {
 
     while (true) {
       if (currentChild.getName() == "list") {
+      	// retrieve number of list to add
       	int list_number = boost::lexical_cast<int>(currentChild.getContent());
 
       	aggregator->add_ranking(inputs_[list_number]);

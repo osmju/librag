@@ -42,6 +42,8 @@ void AggregatorXML<T>::run() {
 	for (int i = 0; i < result->size(); ++i) {
 		Base::final_aggregation_->push_back(result->at(i));
 	}
+
+	visitor.cleanup();
 }
 
 /*=============================================================================*/
