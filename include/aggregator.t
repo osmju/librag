@@ -38,6 +38,7 @@ template <class T>
 inline void Aggregator<T>::cleanup() {
 	inputs_.clear();
 	inputs_names_.clear();
+	final_aggregation_->clear();
 }
 
 /*=============================================================================*/
