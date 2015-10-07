@@ -27,7 +27,7 @@ using namespace rag;
 int main(int argc, char** argv) {
 	cout << "LibRAG 0.1 Testing" << endl;
 
-	Aggregator<string>::ptr aggregator = Aggregator<string>::create("xml", "/home/josmalskyj/dummy.xml");
+	Aggregator<string>::ptr aggregator = Aggregator<string>::create("xml", "/home/josmalskyj/Results/dummy.xml");
 	Aggregator<string>::RList* list1 = new Aggregator<string>::RList;
 	Aggregator<string>::RList* list2 = new Aggregator<string>::RList;
 	Aggregator<string>::RList* list3 = new Aggregator<string>::RList;
@@ -68,6 +68,8 @@ int main(int argc, char** argv) {
 	delete(list1);
 	delete(list2);
 	delete(list3);
+
+	aggregator->cleanup();
 
 	return 0;
 }

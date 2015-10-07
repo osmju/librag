@@ -35,6 +35,14 @@ inline typename Aggregator<T>::RList_ptr Aggregator<T>::get_result() {
 /*=============================================================================*/
 
 template <class T>
+inline void Aggregator<T>::cleanup() {
+	inputs_.clear();
+	inputs_names_.clear();
+}
+
+/*=============================================================================*/
+
+template <class T>
 typename Aggregator<T>::ptr Aggregator<T>::create(std::string type, std::string option) {
 	if (type == "list") {
 		return typename Aggregator::ptr(new AggregatorList<T>(option));

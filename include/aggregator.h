@@ -30,6 +30,8 @@ namespace rag {
 
 			virtual void run() = 0;
 
+			void cleanup();
+
 			static ptr create(std::string name, std::string option);
 
 		protected:
