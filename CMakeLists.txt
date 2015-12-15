@@ -4,9 +4,19 @@ cmake_minimum_required(VERSION 2.6)
 # ==========
 
 set(project_name "LibRAG")      					## change project name here
-set(library_name "rag")     						## change project library name here
+set(library_name "rag")  
+set(CECI ON)
+   			
 set(install_path_linux "/home/josmalskyj/libs/rag")
 set(install_path_osx "/Users/osmju/libs/rag")
+
+if (CECI)
+    message("CECI Cluster")    
+    set(BOOST_ROOT              "/home/ulg/INTELSIG/osmju/lib/boost/")
+    set(BOOST_INCLUDEDIR        "/home/ulg/INTELSIG/osmju/lib/boost/include/")    
+    set(install_path_linux      "/home/ulg/INTELSIG/osmju/lib/rag")
+endif()
+
 
 
 # Project name
