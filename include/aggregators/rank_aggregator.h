@@ -21,6 +21,7 @@
 #include "aggregators/rank_aggregator_borda.h"
 #include "aggregators/rank_aggregator_mean.h"
 #include "aggregators/rank_aggregator_median.h"
+#include "aggregators/rank_aggregator_min.h"
 #include "aggregators/rank_aggregator_kemeny.h"
 #include "types.h"
 

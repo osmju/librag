@@ -51,7 +51,14 @@ typename RankAggregator<T>::ptr RankAggregator<T>::create(std::string name) {
 	else if (name == "median") {
 		return typename RankAggregator<T>::ptr(new AggregatorMedian<T>());
 	}
-	else if (name == "kemeny-median" || 	name == "kemeny-mean" || name == "kemeny-borda") {
+	else if (name == "min") {
+		return typename RankAggregator<T>::ptr(new AggregatorMin<T>());
+	}
+	else if (name == "kemeny-median" ||
+					  name == "kemeny-mean"   ||
+					  name == "kemeny-borda"  ||
+					  name == "kemeny-min") {
+
 		typename RankAggregator<T>::ptr aggregator =
 				typename RankAggregator<T>::ptr(new AggregatorKemeny<T>());
 
@@ -61,6 +68,8 @@ typename RankAggregator<T>::ptr RankAggregator<T>::create(std::string name) {
 			aggregator->set_initial_aggregation("mean");
 		else if (name == "kemeny-borda")
 			aggregator->set_initial_aggregation("borda");
+		else if (name == "kemeny-min")
+			aggregator->set_initial_aggregation("min");
 
 		return aggregator;
 	}
