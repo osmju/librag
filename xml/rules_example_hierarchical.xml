@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- 
+First aggregate lists 0 and 1 (first list starts at index 0) with the single mean aggregation rule.
+Then take the resulting aggregation (mean{0,1}) and aggregate it with list 2 using the minimum rule.
+Optimize the resulting aggregation using local-Kemenization (kemeny-min rule).
+-->
+<rule type="kemeny-min">
+
+  <rule type="mean">
+    <list>0</list>
+    <list>1</list>    
+  </rule>
+
+  <list>2</list>   
+</rule>
+
+
+

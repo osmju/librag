@@ -22,7 +22,7 @@ using namespace std;
 using namespace rag;
 
 int main(int argc, char** argv) {
-	cout << "LibRAG 0.1 Example" << endl;
+	cout << "LibRAG 0.1 -- Single Aggregation Example" << endl;
 
 	// Instantiate a new Aggregator object of type STRING.
 	// Here we create a single aggregator (type "list") and the aggregation rule
@@ -56,9 +56,9 @@ int main(int argc, char** argv) {
 	list3->push_back("Melissa");
 
 	// Add ranking to the rank aggregator.
-	aggregator->add_ranking(list1, "list1");
-	aggregator->add_ranking(list2, "list2");
-	aggregator->add_ranking(list3, "list3");
+	aggregator->add_ranking(list1);
+	aggregator->add_ranking(list2);
+	aggregator->add_ranking(list3);
 
 	// run aggregation using the kemeny-mean rule
 	aggregator->run();

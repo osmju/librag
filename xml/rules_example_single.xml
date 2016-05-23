@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- 
+Aggregate list 0, 1 and 2 using the mean aggregation rule and refine the aggregation using
+local Kemenization.
+-->
+<rule type="kemeny-mean">  
+  <list>0</list>
+  <list>1</list>    
+  <list>2</list>   
+</rule>
+
+
+

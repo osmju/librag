@@ -34,7 +34,7 @@ namespace rag {
 
 			virtual ~Aggregator();
 
-			void add_ranking(const RList* list, std::string name);
+			void add_ranking(const RList* list, std::string name = "");
 
 			virtual RList_ptr get_result();
 

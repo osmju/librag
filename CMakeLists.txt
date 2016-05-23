@@ -5,16 +5,23 @@ cmake_minimum_required(VERSION 2.6)
 
 set(project_name "LibRAG")      					## change project name here
 set(library_name "rag")  
-set(CECI OFF)
-   			
-set(install_path_linux "/home/josmalskyj/libs/rag")
-set(install_path_osx "/Users/osmju/libs/rag")
+set(CECI OFF)   			
+
+#set(INSTALL_PATH_INCLUDE "/home/josmalskyj/libs/rag")
+#set(INSTALL_PATH_LIB "/home/josmalskyj/libs/rag/lib")
+
+#set(INSTALL_PATH_INCLUDE "/home/josmalskyj/libs/rag" CACHE STRING "Set the include install path" FORCE)
+#set(INSTALL_PATH_LIB "/home/josmalskyj/libs/rag/lib" CACHE STRING "Set the library .so or .dylib install path" FORCE)
+
+set(INSTALL_PATH_INCLUDE "/Users/osmju/libs/rag" CACHE STRING "Set the include install path" FORCE)
+set(INSTALL_PATH_LIB "/Users/osmju/libs/rag/lib" CACHE STRING "Set the library .so or .dylib install path" FORCE)
 
 if (CECI)
     message("CECI Cluster")    
     set(BOOST_ROOT              "/home/ulg/INTELSIG/osmju/lib/boost/")
     set(BOOST_INCLUDEDIR        "/home/ulg/INTELSIG/osmju/lib/boost/include/")    
-    set(install_path_linux      "/home/ulg/INTELSIG/osmju/lib/rag")
+    set(INSTALL_PATH_INCLUDE    "/home/ulg/INTELSIG/osmju/lib/rag")
+    set(INSTALL_PATH_LIB       "/home/ulg/INTELSIG/osmju/lib/rag/lib")
 endif()
 
 
@@ -34,24 +41,10 @@ if (APPLE)
     add_definitions(-DSYSTEM_OSX)
 endif (APPLE)
 
-# Uncomment the following bloc if you need to link external libraries.
-
-# Libraries
-# =========
-
-#link_directories(${PROJECT_SOURCE_DIR}/lib)
-
-#if (APPLE)
-#    link_directories(${PROJECT_SOURCE_DIR}/lib/osx)
-#elseif (UNIX)
-#    link_directories(${PROJECT_SOURCE_DIR}/lib/linux)
-#endif ()
-
 # Packages
 # ========
 
 find_package(Boost REQUIRED)
-find_package(Boost COMPONENTS system filesystem iostreams program_options thread REQUIRED)
 find_package(LibXml2 REQUIRED)
 
 add_definitions(${LIBXML2_DEFINITIONS})
@@ -62,7 +55,7 @@ add_definitions(${LIBXML2_DEFINITIONS})
 include_directories(   
 	SYSTEM
 	${Boost_INCLUDE_DIRS}    
-  ${LIBXML2_INCLUDE_DIR}	
+    ${LIBXML2_INCLUDE_DIR}	
 )
 
 include_directories(
@@ -157,11 +150,11 @@ endif()
 # Installation
 # ============
 
-if (APPLE)
-	INSTALL(DIRECTORY include DESTINATION ${install_path_osx})
-	INSTALL(FILES build/librag.dylib DESTINATION ${install_path_osx}/lib)
+INSTALL(DIRECTORY include DESTINATION ${INSTALL_PATH_INCLUDE})
+
+if (APPLE)	
+	INSTALL(FILES build/librag.dylib DESTINATION ${INSTALL_PATH_LIB})
 elseif (UNIX)
-	INSTALL(DIRECTORY include DESTINATION ${install_path_linux})
-	INSTALL(FILES build/librag.so DESTINATION ${install_path_linux}/lib)
+	INSTALL(FILES build/librag.so DESTINATION ${INSTALL_PATH_LIB})
 endif ()
 
