@@ -31,7 +31,7 @@ int main(int argc, char** argv) {
 	Aggregator<string>::ptr aggregator = Aggregator<string>::create("list", "kemeny-mean");
 
 	// Create 3 rankings containing String values. We want to aggregate all three
-	// ranking using the "kemeny-mean" rule.
+	// ranking using the rules specified in the XML file.
 	Aggregator<string>::RList* list1 = new Aggregator<string>::RList;
 	Aggregator<string>::RList* list2 = new Aggregator<string>::RList;
 	Aggregator<string>::RList* list3 = new Aggregator<string>::RList;
@@ -60,7 +60,7 @@ int main(int argc, char** argv) {
 	aggregator->add_ranking(list2);
 	aggregator->add_ranking(list3);
 
-	// run aggregation using the kemeny-mean rule
+	// run aggregation
 	aggregator->run();
 
 	// Retrieve final aggregation of the input rankings.
